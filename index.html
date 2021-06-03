@@ -1,10 +1,101 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title></title>
-</head>
-<body>
-  ぺろぺろ
-</body>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rerorero</title>
+    <script src="https://kit.fontawesome.com/eb7766f2f6.js" crossorigin="anonymous"></script>
+    <style>
+    #canvas { 
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+    }
+ 
+    #body {
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+    }
+
+    #footer {
+        position: fixed;
+        padding: 100px;
+        bottom: 0;
+        width:100%;
+    }
+
+    a.link {
+      color: #BBB;
+      padding: 1px;
+    }
+
+    i.fab:hover {
+      color: #CFC;
+    }
+
+    span.name {
+      margin-left: 10px;
+    }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <section id="body">
+    <div id="footer">
+      <a class="link" href="https://github.com/rerorero">
+        <i class="fab fa-github fa-lg"><span class="name">rerorero</span></i>
+      </a>
+      </p>
+      <a class="link" href="https://twitter.com/rererorerero">
+        <i class="fab fa-twitter fa-lg"><span class="name">rererorerero</span></i>
+      </a>
+      </p>
+      <a class="link" href="https://rerorero.medium.com/">
+        <i class="fab fa-medium fa-lg"><span class="name">rerorero</span></i>
+      </a>
+      </p>
+      <a class="link" href="https://qiita.com/rerorero">
+        <i class="fab fa-lg">Qiita:<span class="name">rerorero</span></i>
+      </a>
+
+    </div>
+    </section>
+    <script>
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      const html = document.documentElement;
+      const w = canvas.width = html.clientWidth;
+      const h = canvas.height = html.clientHeight;
+      const cols = Math.floor(w / 20) + 1;
+      const ypos = Array(cols).fill(0);
+      const chars = ["れ", "ろ", "レ", "ロ"] ;
+
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, w, h);
+
+      function matrix () {
+        ctx.fillStyle = '#0001';
+        ctx.fillRect(0, 0, w, h);
+        
+        ctx.fillStyle = '#0A0';
+        ctx.font = '15pt monospace';
+        
+        ypos.forEach((y, ind) => {
+          const text = chars[Math.floor(Math.random() * chars.length)];
+          const x = ind * 20;
+          ctx.fillText(text, x, y);
+          if (y > 100 + Math.random() * 10000) ypos[ind] = 0;
+          else ypos[ind] = y + 20;
+        });
+      }
+
+      setInterval(matrix, 80);
+    </script>
+  </body>
 </html>
